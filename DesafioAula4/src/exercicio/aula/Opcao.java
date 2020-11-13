@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class Opcao{
 	static Scanner teclado = new Scanner(System.in);
 	
-	public static void selecionarOpcao1(String animal) {	
-		
+	public static void selecionarOpcao1() {	
+		String animal = "";
 		
 	if(animal.equals("Gato")) {
 		System.out.println("Quel legal, o meu também");	
@@ -21,9 +21,9 @@ public class Opcao{
 	
 				
 }
-	public static void selecionarOpcao2(int idade) {		
+	public static void selecionarOpcao2() {		
 		System.out.println("Qual a idade do seu filho");
-		 idade = teclado.nextInt();
+		 int idade = teclado.nextInt();
 					
 			if(idade > 0 && idade < 12) {
 				System.out.println("Ele ainda é uma criança");

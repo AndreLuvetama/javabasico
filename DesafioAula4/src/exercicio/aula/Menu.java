@@ -20,11 +20,11 @@ public class Menu {
 		switch(parametro) {
 		
 		case 1:
-			op.selecionarOpcao1(animal);				
+			op.selecionarOpcao1();				
 		break;
 		
 		case 2:
-			   op.selecionarOpcao2(idade);
+			   op.selecionarOpcao2();
 		break;
 		
 		case 3:
