@@ -8,35 +8,50 @@ public class Opcao{
 	public static void selecionarOpcao1() {	
 		String animal = "";
 		
-	if(animal.equals("Gato")) {
-		System.out.println("Quel legal, o meu também");	
-		
+	if(animal.toLowerCase().equals("Gato")) {
+		Impressora.imprimaValor("Quel legal, o meu também");		
 	}else {
-		while(!animal.equals("Gato")){	
-			System.out.println("Qual o nome do seu animal preferido");	
+			do {
+				Impressora.imprimaValor("Qual o nome do seu animal preferido");
+				animal = teclado.nextLine();
+			   }while(!animal.equals("Gato"));
+		
+		/*
+		while(!animal.equals("Gato")){
+			Impressora.imprimaValor("Qual o nome do seu animal preferido");
 			animal = teclado.nextLine();
 				
-		}
+		}*/
 	}
 	
 				
 }
-	public static void selecionarOpcao2() {		
-		System.out.println("Qual a idade do seu filho");
+	public static  int selecionarOpcao2() {		
+		Impressora.imprimaValor("Qual a idade do seu filho");
 		 int idade = teclado.nextInt();
 					
 			if(idade > 0 && idade < 12) {
-				System.out.println("Ele ainda é uma criança");
+				Impressora.imprimaValor("Ele ainda é uma criança");				
 			}else if(idade > 11 && idade < 19) {
-				System.out.println("Adolescência é fogo");
+				Impressora.imprimaValor("Adolescência é fogo");
 			}else if(idade > 18) {
-				System.out.println("Ele já é um adulto!”");
-				
+				Impressora.imprimaValor("Ele já é um adulto!");				
 			}
-		
+		return idade;
 	}
-	public static void selecionarOpcao3() {	
-		System.out.println("Em construção..");
+	public static void selecionarOpcao3(int idade) {	
+		
+		if(idade == 0) {
+			Impressora.imprimaValor("É necessário informar a idade na Opção 3\n");
+		}else {
+			for(int i =0; i<= idade; i++) {
+				Impressora.imprimaValor(i + "...");
+			}
+			Impressora.imprimaValor(idade + "São tanto anos... \n");	
+			
+		}
+		
+			
 		
 	}
 	

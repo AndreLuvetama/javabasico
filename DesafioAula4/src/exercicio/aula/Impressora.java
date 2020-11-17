@@ -3,8 +3,17 @@ package exercicio.aula;
 import java.util.Scanner;
 
 public class Impressora{
-	static Scanner teclado = new Scanner(System.in);
+	 Scanner teclado = new Scanner(System.in);
 	
+	
+	public static void imprimaValor(String parametro) {
+		System.out.println(parametro);	
+		
+	}
+	
+
+	
+	/*
 	public static void imprimaValor(int parametro) {
 		System.out.println("Escolha um número de 1 a 3!");
 		System.out.print("1-Descobrir o animal\n");
@@ -12,6 +21,6 @@ public class Impressora{
 		System.out.print("3-Nova tela do sistema\n");
 		
 		
-	}
+	}*/
 	
 }
