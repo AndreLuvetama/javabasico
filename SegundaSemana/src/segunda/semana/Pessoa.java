@@ -44,11 +44,6 @@ public class Pessoa {
 		this.sexo = sexo;
 	}
 	
-	@Override
-	public String toString() {
-		return "Pessoa [nome=" + nome + ", peso=" + peso + ", sexo=" + sexo + ", getNome()=" + getNome()
-				+ ", getPeso()=" + getPeso() + ", getSexo()=" + getSexo() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
-	}
+	
 
 }

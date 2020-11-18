@@ -11,27 +11,7 @@ import java.util.Scanner;
  */
 public class Principal2 {
 
-	public static String lerValor(String pergunta, Scanner sc) {
-		System.out.println(pergunta);
-		return sc.next();
-	}
-
-	public static float lerValor(String pergunta, Scanner sc, float valor) {
-		System.out.println(pergunta);
-		return sc.nextFloat();
-	}
-
-	public static int lerValor(String pergunta, Scanner sc, int valor) {
-		System.out.println(pergunta);
-		return sc.nextInt();
-	}
-
-	public static char lerValor(String pergunta, Scanner sc, char valor) {
-		System.out.println(pergunta);
-		String retorno = sc.next();
-		return retorno.charAt(0);
-	}
-
+	
 	/**
 	 * 
 	 * @param args
@@ -54,7 +34,7 @@ public class Principal2 {
 		char[] sexos = new char[tamanho];
 		int opcao = 0;
 		int nrRegistro = 0;
-		String sexo;
+		//String sexo;
 		do {
 			opcao = lerValor("Informe a opção que deseja acessar:", sc, opcao);
 			switch (opcao) {
@@ -65,38 +45,38 @@ public class Principal2 {
 				for (int i = 0; i < tamanho; i++) {
 					Pessoa pConsulta = pessoas[i];
 					if(pConsulta != null) {
-						System.out.printf("Nome: %s \nPeso: %.2f\nSexo: %s\n",pConsulta.getNome(), pConsulta.getPeso(), pConsulta.getSexo());
-						
+						System.out.printf("Nome: %s \nPeso: %.2f\nSexo: %s\n", pConsulta.getNome(), pConsulta.getPeso(), pConsulta.getSexo());
 					}
 					
 						}
 				break;
 			case 2:
 				for (int i = 0; i < tamanho; i++) {
-					Pessoa pConsulta = pessoas[i];
-					if(pConsulta != null) {
-						System.out.printf("Registro nr %d \n", (i + 1));
-				
-						adicionarValorArray1(pConsulta.setNome(nomes), pConsulta.setPeso(pesos), pConsulta.setSexo(sexos), i, sc);
-					}
+					System.out.printf("Registro numero %d \n", (i + 1));
+					pessoas[i] = adicionarValorPessoa(pessoas[i], sc);
 					System.out.println("-----------------------");
-				}
+						}
+									
 				break;
 			case 3:
 				nrRegistro = lerValor("Informe o nº do registro para alteração:", sc, nrRegistro);
-				adicionarValorArray(nomes, pesos, sexos, (nrRegistro - 1), sc);
+				pessoas[nrRegistro-1] = adicionarValorPessoa(pessoas[nrRegistro-1], sc);
 				break;
 			case 4:
 				// Crie a opção 4 tenha uma seleção de qual informação o usuário deseja alterar.
 				nrRegistro = lerValor("Informe o nº do registro para alteração:", sc, nrRegistro);
 				int campoAlterando = lerValor("Qual a opção que deseja alterar ? \n1-Nome;\n2-Peso;\n3-Sexo;", sc, 0);
-				adicionarValorArray(nomes, pesos, sexos, (nrRegistro - 1), sc, campoAlterando);
+				adicionarValorPessoa(pessoas[nrRegistro-1], sc, campoAlterando);
 				break;
 			case 5:
 				// Imprimir valores por registro
 				nrRegistro = lerValor("Informe o nº do registro para alteração:", sc, 0);
-				System.out.printf("Nome: %s \nPeso: %.2f\nSexo: %s\n", nomes[nrRegistro - 1], pesos[nrRegistro - 1],
-						sexos[nrRegistro - 1]);
+				Pessoa pConsulta2 = pessoas[nrRegistro - 1];
+				if(pConsulta2 != null) {
+					System.out.printf("Nome: %s \nPeso: %.2f\nSexo: %s\n",pConsulta2.getNome(), pConsulta2.getPeso(), pConsulta2.getSexo());
+					
+				}
+				
 				break;
 			default:
 				System.out.println("Opção invalida!");
@@ -105,34 +85,54 @@ public class Principal2 {
 		} while (opcao != 0);
 
 	}
+private static Pessoa adicionarValorPessoa(Pessoa p, Scanner sc) {
+	if(p ==null) {
+		p = new Pessoa();
+	}
+	p.setNome(lerValor("Informe o nome: ", sc));
+	p.setPeso(lerValor("Informe o peso: ", sc, p.getPeso()));
+	p.setSexo(lerValor("Informe o sexo (F/M): ", sc, p.getSexo()));
+	return p;
+}
 
 
+	private static Pessoa adicionarValorPessoa(Pessoa p, Scanner sc, int campoAlterando) {
+		if(p ==null) {
+			p = new Pessoa();
+		}
+		if (campoAlterando == 1) {
+			p.setNome(lerValor("Informe o nome: ", sc));
+		}else if (campoAlterando == 2){
+			p.setPeso(lerValor("Informe o peso: ", sc, p.getPeso()));			
+		} else if(campoAlterando == 3){
+			p.setSexo(lerValor("Informe o sexo (F/M): ", sc, p.getSexo()));
+			
+		}
+		return p;
+		
+	}
+	public static String lerValor(String pergunta, Scanner sc) {
+		System.out.println(pergunta);
+		return sc.next();
+	}
 
+	public static Float lerValor(String pergunta, Scanner sc, Float valor) {
+		System.out.println(pergunta);
+		return sc.nextFloat();
+	}
 
+	public static Integer lerValor(String pergunta, Scanner sc, Integer valor) {
+		System.out.println(pergunta);
+		return sc.nextInt();
+	}
 
-	private static void adicionarValorArray1(String[] nomes, float[] pesos, char[] sexos, int i, Scanner sc) {
-		nomes[i] = lerValor("Informe o nome: ", sc);
-		pesos[i] = lerValor("Informe o peso: ", sc, pesos[i]);
-		sexos[i] = lerValor("Informe o sexo (F/M): ", sc, sexos[i]);
+	public static Character lerValor(String pergunta, Scanner sc, Character valor) {
+		System.out.println(pergunta);
+		String retorno = sc.next();
+		return retorno.charAt(0);
 	}
 
 	
-	private static void adicionarValorArray(String[] nomes, float[] pesos, char[] sexos, int i, Scanner sc) {
-		nomes[i] = lerValor("Informe o nome: ", sc);
-		pesos[i] = lerValor("Informe o peso: ", sc, pesos[i]);
-		sexos[i] = lerValor("Informe o sexo (F/M): ", sc, sexos[i]);
-	}
-
-	private static void adicionarValorArray(String[] nomes, float[] pesos, char[] sexos, int i, Scanner sc,
-			int campoAlterando) {
-		if (campoAlterando == 1) {
-			nomes[i] = lerValor("Informe o nome: ", sc);
-		} else if (campoAlterando == 2) {
-			pesos[i] = lerValor("Informe o peso: ", sc, pesos[i]);
-		} else if (campoAlterando == 3) {
-			sexos[i] = lerValor("Informe o sexo (F/M): ", sc, sexos[i]);
-		}
-	}
-	// Criem mais uma sobrecarga do método adicionarValorArray para o opção 4
+		// Criem mais uma sobrecarga do método adicionarValorArray para o opção 4
 
 }
