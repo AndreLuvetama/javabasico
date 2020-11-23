@@ -1,9 +1,9 @@
 package segunda.semana;
 
-public class Livro {
+public class Livro extends ClassePadrao {
 	
 	
-	private String nome;
+	//private String nome;
 	private String editora;
 	private String autor;
 	private String classificacao;	
@@ -12,7 +12,7 @@ public class Livro {
 	public Livro() {}
 	
 	public Livro(String nome, String editora, String classificacao, Integer anoPublicao, String autor) {
-		
+		//this.setNome(nome);
 		this.nome = nome;
 		this.editora = editora;
 		this.classificacao = classificacao;
@@ -26,12 +26,12 @@ public class Livro {
 	public void setAnoPublicao(Integer anoPublicao) {
 		this.anoPublicao = anoPublicao;
 	}
-	public String getNome() {
+	/*public String getNome() {
 		return nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
+	}*/
 	public String getEditora() {
 		return editora;
 	}
