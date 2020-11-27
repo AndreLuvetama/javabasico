@@ -40,7 +40,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 		List<Usuario> usuarios = new ArrayList<>();
 		try {
 			PreparedStatement ps = cn.prepareStatement("SELECT * FROM "
-					+ " tb_usuario where nme_usuario like CONCAT('%','a','%') ");
+					+ " tb_usuario where nme_usuario like CONCAT('%',?,'%') ");
 			ps.setString(1, nome);
 			ResultSet rs = ps.executeQuery();
 			usuarios = UsuarioParser.rsToListUsuario(rs);
@@ -73,18 +73,19 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 	@Override
 	public Integer deletarUsuario(Long id) {
+		Integer i=0;
 		try {
 			this.cn.setAutoCommit(false);
 			PreparedStatement ps = cn.prepareStatement("DELETE FROM tb_usuario where idt  = ?");
 			ps.setLong(1, id);
-			Integer i = ps.executeUpdate();
+			i = ps.executeUpdate();
 			this.cn.commit();
-			return i;
+		
 		} catch (Exception e) {
 			this.cn.rollback();
 			System.err.println(e.toString());
 		} finally {
-			return 0;
+			return i;
 		}
 	}
 
@@ -123,6 +124,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 			return i;
 		}
 	}
+	
+	
 
 	@Override
 	public Integer cadastrarUsuario(Usuario u, String senha) {
@@ -132,7 +135,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 			ResultSet keys = null;
 			this.cn.setAutoCommit(false);
 			PreparedStatement ps = cn.prepareStatement(
-					"INSERT into  tb_usuario(nme_usuario,usr_usuario,pwd_usuario)  " + " VALUES(?,?,MD5(?)) ",
+					"INSERT into  tb_usuario(nme_usuario,usr_usuario,pwd_usuario)  " + " VALUES(?,?,?) ",
 					RETURN_GENERATED_KEYS);
 			ps.setString(1, u.getNmeUsuario());
 			ps.setString(2, u.getUsrUsuario());

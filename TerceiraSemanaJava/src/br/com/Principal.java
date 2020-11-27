@@ -16,7 +16,7 @@ public class Principal {
 		UsuarioDAO dao = new UsuarioDAO();
 		Scanner sc = new Scanner(System.in);
 		Integer menu = 0;
-		if (login(sc, dao) == 1) {
+		if (login(sc, dao) == 1) { //Primeiro chama o login, se ok entra no menu
 			do {
 				menu = Leitor.lerValor("1) Buscar Todos\n2) Cadastrar\n3) Editar\n4) Deletar", sc, menu);
 				Leitor.limparTela();
@@ -48,6 +48,18 @@ public class Principal {
 	private static void deletarUsuario(UsuarioDAO dao, Scanner sc) {
 		Usuario usuarioSelecionado = buscarUsuarioPorParteDoNome(dao, sc,
 				"Qual o identificador do usuário que deseja deletar ? ");
+		if(usuarioSelecionado != null) {
+			if(dao.deletarUsuario(usuarioSelecionado.getIdt())>0) {
+				System.out.printf("Usuário %s deletado com sucesso!", usuarioSelecionado.getNmeUsuario());
+				}else {
+					System.out.printf("Não foi possivel deletar o usuário", usuarioSelecionado.getNmeUsuario());
+				}
+		}else {
+			System.out.printf("Nenhum usuário para deletar");
+			
+		}
+		
+		
 	}
 
 	private static void editarUsuario(UsuarioDAO dao, Scanner sc) {
@@ -63,6 +75,8 @@ public class Principal {
 		usuarioSelecionado.setUsrUsuario(
 				novoLoginDoUsuario == null || novoLoginDoUsuario.equals("") ? usuarioSelecionado.getUsrUsuario()
 						: novoLoginDoUsuario);
+		
+		dao.editarUsuario(usuarioSelecionado);
 
 	}
 
@@ -93,7 +107,7 @@ public class Principal {
 			Long identificadoUsuarioSelecionado) {
 		Usuario u = null;
 		for (int i = 0; i < usuarios.size(); i++) {
-			if (u.getIdt().equals(identificadoUsuarioSelecionado)) {
+			if (usuarios.get(i).getIdt().equals(identificadoUsuarioSelecionado)) {
 				u = usuarios.get(i);
 			}
 		}
@@ -113,7 +127,7 @@ public class Principal {
 			u.setUsrUsuario(Leitor.lerValor("Qual o login que deseja utilizar :", sc));
 			String senha = Leitor.lerValor("Qual a senha:", sc);
 
-			if (dao.cadastrarUsuario(u, senha) == 1) {
+			if (dao.cadastrarUsuario(u, senha) >1) {
 				System.out.println("Usuário Cadastrado com sucesso!");
 			} else {
 				System.out.println("Usuário não foi cadastrado...");
