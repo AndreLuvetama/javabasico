@@ -8,6 +8,7 @@ public class Cadastro {
 	private String senha;
 	private String usuario;
 	
+	
 	public Cadastro()
 	{     super();
 	}

@@ -13,7 +13,6 @@ public class CadastroApp {
 		
 		menuPrincipal(teclado);
 	
-
 	}
 	
 	
@@ -21,8 +20,7 @@ public class CadastroApp {
 		CadastroDAO dao = new CadastroDAO();
 		Integer menu = 0;
 		do {
-			menu = Leitor.lerValor("Informe a opção desejada\n1- Login\n2-Novo Cadastro\n3-Deletar Cadastro\n4-Editar Cadastro"
-					+ "\n5-Pesquisar Nome\n4-Listar Cadastro\n0-Sair da aplicação", teclado, menu);
+			menu = Leitor.lerValor("\nInforme a opção desejada\n1- Login\n2-Novo Cadastro\n0-Sair da aplicação", teclado, menu);
 			
 			switch(menu) {
 					case 1: 
@@ -32,20 +30,7 @@ public class CadastroApp {
 					case 2: 
 						 System.out.println("Novo Cadastro");
 					break;
-					
-					case 3: 
-						 System.out.println("Deletar Cadastro");
-					break;
-					
-					case 4: 
-						   System.out.println("Editar Cadastro");
-					break;
-					case 5: 
-						   System.out.println("Buscar Cadastro");
-					break;
-					case 6: 
-						   System.out.println("Listar Cadastro");
-					break;
+									
 					case 0: 
 						   System.out.println("Sair...");
 					break;
@@ -58,12 +43,43 @@ public class CadastroApp {
 	public static Integer login(Scanner teclado, CadastroDAO dao) {
 		Integer testarLogin = 0;
 		Boolean tentarNovamente = false;
+		Integer lgMenu = 0;
 		do {
 			tentarNovamente = false;
 			String usuario = Leitor.lerValor("Informe a Usuario: ", teclado);
 			String senha = Leitor.lerValor("Informe a Senha: ", teclado);
 			if(dao.verificarSenhaUsuario(usuario, senha)) {
 				System.out.println("Login realizado com sucesso!");
+				 lgMenu = Leitor.lerValor("\nInforme a opção desejada\n1-Deletar Cadastro\n2-Editar Cadastro"
+						+ "\n3-Pesquisar Nome\n4-Listar Cadastro\n0-Sair da aplicação", teclado, lgMenu);
+				 	do {
+				 		switch(lgMenu) {
+				 		case 1: 
+				 			   System.out.println("Deletar Cadastro");
+						break;
+						
+						case 2: 
+							 System.out.println("Editar Cadastro");
+						break;
+						
+						case 3: 
+							 System.out.println("Pesquisar Cadastro");
+						break;
+						
+						case 4: 
+							   System.out.println("Listar Cadastro");
+						break;
+						case 5: 
+							   System.out.println("Buscar Cadastro");
+						break;
+						
+						case 0: 
+							   System.out.println("Sair...");
+						break;
+				 		}
+				 	}while(lgMenu!=0);
+				 
+				 
 			}else {
 				System.out.println("Seu usuário ou senha estão incorretos");
 				tentarNovamente = Leitor.lerValor("Gostaria de tentar novamente - Sim/Nao :", teclado, tentarNovamente);
@@ -72,11 +88,6 @@ public class CadastroApp {
 		}while(testarLogin ==0 ||tentarNovamente );
 		return testarLogin;
 	}
-	
-	
-
-	
-	
 	
 	
 	public static void novoCadastro() {

@@ -21,7 +21,7 @@ public class CadastroDAO implements ICadastroDAO{
 	public Boolean verificarSenhaUsuario(String usuario, String senha) {
 		Boolean retorno = false;
 		try {
-			PreparedStatement query = cnn.prepareStatement("SELECT *FROM tab_cadastro where cadastroUsuario = ? and cadastroSenha =?");
+			PreparedStatement query = cnn.prepareStatement("SELECT *FROM tab_cadastro where cadastroUsuario = ? and senha = ?");
 			query.setString(1, usuario);
 			query.setString(2, senha);
 			ResultSet rs = query.executeQuery();
@@ -36,7 +36,8 @@ public class CadastroDAO implements ICadastroDAO{
 		}
 		
 	}
-
+	
+	
 	@Override
 	public Integer novoCadastro(Cadastro cd, String senha) {
 		// TODO Auto-generated method stub
